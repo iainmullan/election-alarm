@@ -6,13 +6,20 @@ $poll = new Alarm();
 <html>
 <head>
 	
+	<title>Election Alarm - Go to bed, we'll wake you up with a tweet when it's over</title>
+	
 	<link rel="stylesheet" href="css/style.css" type="text/css" />
+	
+	<meta property="og:image" content="http://iainmullan.com/img/election-alarm.jpg" />
 	
 </head>
 <body>
+	<?php include('fork.php'); ?>
 	
-	<h1>Election Alarm</h1>
+	
 	<div id="content">
+		<h1>Election Alarm</h1>
+		<h2>Go to bed, we'll wake you up with a tweet when it's over</h2>
 		
 		<div class="mid">270</div>
 		
@@ -55,6 +62,10 @@ $poll = new Alarm();
 			
 		</div>
 		
+
+	</div>
+	<div id="footer">
+		a bedtime-inspired hack by <a href="http://www.iainmullan.com">Iain Mullan</a>
 	</div>
 
 </body>
