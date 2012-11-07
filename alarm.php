@@ -9,12 +9,13 @@ function _log($msg) {
 	fwrite($fh, $message);
 	fclose($fh);
 }
-// ini_set('display_errors', 1);
+
 require_once 'twitteroauth/twitteroauth/twitteroauth.php';
 class Alarm {
 	
 	var $threshold = 270;
 	var $dry = false;
+	var $checkWinner = false;
 	
 	function __construct() {
 
@@ -31,7 +32,7 @@ class Alarm {
 			$config['twitter']['access_token'],
 			$config['twitter']['access_secret']
 		);
-		
+
 	}
 	
 	function current() {
@@ -57,15 +58,16 @@ class Alarm {
 	}
 	
 	function checkWinner($score) {
-		
-		if ($score['dem'] >= $this->threshold) {
-			$msg = "Barack Obama is the President! [Obama {$score['dem']} - {$score['rep']} Romney]";
-			$this->tweet($msg);
-			$this->alarm($msg);
-		} else if ($score['rep'] >= $this->threshold) {
-			$msg = "Mitt Romney is the President! [Obama {$score['dem']} - {$score['rep']} Romney]";
-			$this->tweet($msg);
-			$this->alarm($msg);
+		if ($this->checkWinner) {
+			if ($score['dem'] >= $this->threshold) {
+				$msg = "Barack Obama is the President! [Obama {$score['dem']} - {$score['rep']} Romney]";
+				$this->tweet($msg);
+				$this->alarm($msg);
+			} else if ($score['rep'] >= $this->threshold) {
+				$msg = "Mitt Romney is the President! [Obama {$score['dem']} - {$score['rep']} Romney]";
+				$this->tweet($msg);
+				$this->alarm($msg);
+			}			
 		}
 
 	}
@@ -81,11 +83,8 @@ class Alarm {
 	}
 	
 	function at($recipient, $message) {
-
 		$tweet = '@'.$recipient.' '.$message;
-		// echo $tweet."\n";
 		$this->tweet($tweet);
-		
 	}
 	
 	// Tweet this message to all your followers
@@ -98,12 +97,7 @@ class Alarm {
 
 		foreach($users as $u) {
 			$this->at($u->screen_name , $message);
-//			echo $u->screen_name."\n";
 		}
-		
-	}
-	
-	function _followers() {
 		
 	}
 	
