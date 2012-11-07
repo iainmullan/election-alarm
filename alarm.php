@@ -3,8 +3,10 @@
 date_default_timezone_set('Europe/London');
 
 function _log($msg) {
+	$message = date('Y-m-d H:i:s').": ".$msg."\n";
+	echo $message;
 	$fh = fopen('log.log', 'a');
-	fwrite($fh, date('Y-m-d H:i:s').": ".$msg."\n");
+	fwrite($fh, $message);
 	fclose($fh);
 }
 // ini_set('display_errors', 1);
