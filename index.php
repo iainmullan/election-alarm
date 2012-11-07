@@ -10,7 +10,9 @@ $poll = new Alarm();
 	
 	<link rel="stylesheet" href="css/style.css" type="text/css" />
 	
-	<meta property="og:image" content="http://iainmullan.com/img/election-alarm.jpg" />
+	<meta property="og:image" content="http://iainmullan.com/election-alarm/img/election-alarm.jpg" />
+	<meta property="og:url" content="http://iainmullan.com/election-alarm/" />
+	<meta property="og:title" content="Election Alarm - Go to bed, we'll wake you up with a tweet when it's over" />
 	
 </head>
 <body>
