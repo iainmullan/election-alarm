@@ -14,6 +14,8 @@ $poll = new Alarm();
 	<meta property="og:url" content="http://iainmullan.com/election-alarm/" />
 	<meta property="og:title" content="Election Alarm - Go to bed, we'll wake you up with a tweet when it's over" />
 	
+	<meta property="fb:admins" content="714655333" />
+	
 </head>
 <body>
 	
