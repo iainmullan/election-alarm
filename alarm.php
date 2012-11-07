@@ -1,13 +1,63 @@
 <?php
+// ini_set('display_errors', 1);
+require_once 'twitteroauth/twitteroauth/twitteroauth.php';
 class Alarm {
 	
-	function leader() {
-		
-		
+	function __construct() {
+
+		$config['twitter'] = array(
+			'consumer_key' => 'DXKyRGK6Tzt3EoLGLvX5KQ',
+			'consumer_secret' => 'oLCqkD40IDq62T5fJUDQnfq26jhk0g12QwQTTCPbMY',
+			'access_token' => '930877946-Ft7UphoXcII04TzOOTUPsfitEUWarQZ4C9kzPVvV',
+			'access_secret' => 'hyTfCBErCF3FYt00DdkpDhKkHAHDjXwlgPEFcrjx6Y'
+		);
+
+		$this->twitter = new TwitterOAuth(
+			$config['twitter']['consumer_key'],
+			$config['twitter']['consumer_secret'],
+			$config['twitter']['access_token'],
+			$config['twitter']['access_secret']
+		);
 		
 	}
 	
-	function tweet($message) {
+	function current() {
+		
+		$res = $this->bbc();
+		
+		$score = "Obama {$res['dem']} - {$res['rep']} Romney";
+		
+		$last = file_get_contents('last_score.txt');
+		
+		if ($last !== $score) {
+			file_put_contents('last_score.txt', $score);
+			$message = $score." http://iainmullan.com/election-alarm/";
+			$this->tweet($message);
+		}
+		
+	}
+		
+	function tweet($tweet) {
+		$params = array('status' => $tweet);
+		$resp = $this->twitter->post('statuses/update', $params);
+	}
+	
+	function at($recipient, $message) {
+
+		$tweet = '@'.$recipient.' '.$message;
+		// echo $tweet."\n";
+		$this->tweet($tweet);
+		
+	}
+	
+	// Tweet this message to all your followers
+	function alarm($message) {
+		
+		// $followers = $this->twitter->get('followers/ids');
+		
+	}
+	
+	function _followers() {
 		
 	}
 	
@@ -27,7 +77,6 @@ class Alarm {
 	}
 
 	function get($source) {
-//		$method = "_$source";
 		return $this->$source();
 	}
 	
