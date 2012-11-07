@@ -1,0 +1,61 @@
+body {
+	font-family: Arial;
+}
+
+br.clear {
+	clear:both;
+}
+#content {
+	width: 960px;
+	margin: 0 auto;
+}
+
+h1 {
+	font-size: 36px;
+	text-align:center;
+	text-transform: uppercase;
+}
+
+.mid {
+	text-align:center;
+}
+
+.score {
+	width: 479px;
+	display: inline;
+	font-size: 24px;
+	color: #FFF;
+}
+
+.score-text {
+	
+}
+
+.bar {
+	padding: 10px;
+	display:block;
+}
+
+.rep {
+	text-align:right;
+	float: right;
+	border-left: 1px solid #555;
+}
+
+.rep .bar {
+	background-color: red;
+	float:right;
+}
+.dem {
+	float:left;	
+	border-right: 1px solid #555;
+}
+
+.dem .bar {
+	background-color: blue;
+}
+
+#signup {
+	margin-top: 50px;
+	text-align:center;
+}
