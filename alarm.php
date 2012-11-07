@@ -64,6 +64,7 @@ class Alarm {
 
 	function tweet($tweet) {
 		$params = array('status' => $tweet);
+		_log('TWEET: '.$tweet);
 		$resp = $this->twitter->post('statuses/update', $params);
 	}
 	
