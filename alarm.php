@@ -59,9 +59,13 @@ class Alarm {
 	function checkWinner($score) {
 		
 		if ($score['dem'] >= $this->threshold) {
-			$this->alarm("Barack Obama is the President! [Obama {$score['dem']} - {$score['rep']} Romney]");
+			$msg = "Barack Obama is the President! [Obama {$score['dem']} - {$score['rep']} Romney]";
+			$this->tweet($msg);
+			$this->alarm($msg);
 		} else if ($score['rep'] >= $this->threshold) {
-			$this->alarm("Mitt Romney is the President! [Obama {$score['dem']} - {$score['rep']} Romney]");			
+			$msg = "Mitt Romney is the President! [Obama {$score['dem']} - {$score['rep']} Romney]";
+			$this->tweet($msg);
+			$this->alarm($msg);
 		}
 
 	}
