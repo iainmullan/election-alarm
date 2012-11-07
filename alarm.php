@@ -13,6 +13,9 @@ function _log($msg) {
 require_once 'twitteroauth/twitteroauth/twitteroauth.php';
 class Alarm {
 	
+	var $threshold = 270;
+	var $dry = false;
+	
 	function __construct() {
 
 		$config['twitter'] = array(
@@ -32,7 +35,6 @@ class Alarm {
 	}
 	
 	function current() {
-		
 		
 		$res = $this->bbc();
 		
@@ -56,18 +58,22 @@ class Alarm {
 	
 	function checkWinner($score) {
 		
-		if ($score['dem'] >= 270) {
-			
-		} else if ($score['rep'] >= 270) {
-			
+		if ($score['dem'] >= $this->threshold) {
+			$this->alarm("Barack Obama is the President! [Obama {$score['dem']} - {$score['rep']} Romney]");
+		} else if ($score['rep'] >= $this->threshold) {
+			$this->alarm("Mitt Romney is the President! [Obama {$score['dem']} - {$score['rep']} Romney]");			
 		}
 
 	}
 
 	function tweet($tweet) {
-		$params = array('status' => $tweet);
-		_log('TWEET: '.$tweet);
-		$resp = $this->twitter->post('statuses/update', $params);
+		if (!$this->dry) {
+			$params = array('status' => $tweet);
+			$resp = $this->twitter->post('statuses/update', $params);
+			_log('TWEET: '.$tweet);
+		} else {
+			_log('DRY RUN: '.$tweet);
+		}
 	}
 	
 	function at($recipient, $message) {
@@ -87,7 +93,8 @@ class Alarm {
 		$users = $this->twitter->get('users/lookup', array('user_id' => implode(',',$ids)));
 
 		foreach($users as $u) {
-			echo $u->screen_name."\n";
+			$this->at($u->screen_name , $message);
+//			echo $u->screen_name."\n";
 		}
 		
 	}
