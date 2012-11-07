@@ -16,6 +16,17 @@ $poll = new Alarm();
 	
 </head>
 <body>
+	
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=266192196816674";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+	
+	
 	<?php include('fork.php'); ?>
 	
 	
@@ -64,6 +75,14 @@ $poll = new Alarm();
 			
 		</div>
 		
+		<div id="social">
+			<div class="fb-like" data-href="http://iainmullan.com/election-alarm/" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>
+			
+			<br/>
+			
+			<div class="tweet-button"><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://iainmullan.com/election-alarm/" data-via="ElectionAlarm" data-related="iainmullan">Tweet</a>
+				</div>
+		</div>
 
 	</div>
 	<div id="footer">
